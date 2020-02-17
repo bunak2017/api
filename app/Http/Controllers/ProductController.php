@@ -13,9 +13,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct() {
+        $this->middleware('auth:api')->except('index','show');
+    }
+
     public function index()
     {
-        return ProductCollection::collection(Product::all());
+        return ProductCollection::collection(Product::paginate(20));
     }
 
     /**
@@ -36,7 +41,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'Stored';
     }
 
     /**
